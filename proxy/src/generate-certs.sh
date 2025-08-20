@@ -19,6 +19,9 @@ export SSL_CONFIG="openssl.cnf"
 export SSL_KEY="key.pem"
 export SSL_CSR="key.csr"
 export SSL_CERT="cert.pem"
+export SSL_KEY_2="key2.pem"
+export SSL_CSR_2="key2.csr"
+export SSL_CERT_2="cert2.pem"
 export SSL_SIZE="4096"
 export SSL_EXPIRE="3650" # 10 years
 
@@ -91,9 +94,21 @@ echo "====> Generating new SSL CERT ${SSL_CERT}"
 openssl x509 -req -in ${SSL_CSR} -CA ${CA_CERT} -CAkey ${CA_KEY} -CAcreateserial -out ${SSL_CERT} \
     -days ${SSL_EXPIRE} -extensions v3_req -extfile ${SSL_CONFIG}  || exit 1
 
+echo "====> Generating new SSL KEY ${SSL_KEY}"
+openssl genrsa -out ${SSL_KEY_2} ${SSL_SIZE}  || exit 1
+
+echo "====> Generating new SSL CSR ${SSL_CSR_2}"
+openssl req -new -key ${SSL_KEY_2} -out ${SSL_CSR_2} -subj "/CN=${SSL_SUBJECT}" -config ${SSL_CONFIG}  || exit 1
+
+echo "====> Generating new SSL CERT ${SSL_CERT_2}"
+openssl x509 -req -in ${SSL_CSR_2} -CA ${CA_CERT} -CAkey ${CA_KEY} -CAcreateserial -out ${SSL_CERT_2} \
+    -days ${SSL_EXPIRE} -extensions v3_req -extfile ${SSL_CONFIG}  || exit 1
+
 echo "====> Generating SSL CERT / KEY COMBO proxy.whatsapp.net.pem"
 cat ${SSL_KEY} > proxy.whatsapp.net.pem
 cat ${SSL_CERT} >> proxy.whatsapp.net.pem
+cat ${SSL_KEY_2} > proxy.q.whatsapp.net.pem
+cat ${SSL_CERT_2} >> proxy.q.whatsapp.net.pem
 
 echo "Certificate generation completed."
 

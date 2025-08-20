@@ -19,6 +19,7 @@ RUN chmod +x /usr/local/bin/generate-certs.sh && \
     /usr/local/bin/generate-certs.sh && \
     mkdir --parents /etc/haproxy/ssl/ && \
     mv /certs/proxy.whatsapp.net.pem /etc/haproxy/ssl/proxy.whatsapp.net.pem && \
+    mv /certs/proxy.q.whatsapp.net.pem /etc/haproxy/ssl/proxy.q.whatsapp.net.pem && \
     chown -R haproxy:haproxy /etc/haproxy/
 WORKDIR /
 
@@ -45,13 +46,18 @@ USER haproxy
 
 # Expose the container-supported network ports
 EXPOSE 80/tcp
+EXPOSE 82/tcp
 EXPOSE 8080/tcp
+EXPOSE 6661/tcp
 EXPOSE 443/tcp
 EXPOSE 8443/tcp
+EXPOSE 2303/tcp
 EXPOSE 5222/tcp
 EXPOSE 8222/tcp
-EXPOSE 8199/tcp
+EXPOSE 8391/tcp
+EXPOSE 623/tcp
 EXPOSE 587/tcp
+EXPOSE 8767/tcp
 EXPOSE 7777/tcp
 
 # This is the startup command which also runs a background job to manage the WAPOX IPs

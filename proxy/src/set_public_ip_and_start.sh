@@ -77,6 +77,8 @@ pushd /home/haproxy/certs
 /usr/local/bin/generate-certs.sh
 mv proxy.whatsapp.net.pem /etc/haproxy/ssl/proxy.whatsapp.net.pem
 chown haproxy:haproxy /etc/haproxy/ssl/proxy.whatsapp.net.pem
+mv proxy.q.whatsapp.net.pem /etc/haproxy/ssl/proxy.q.whatsapp.net.pem
+chown haproxy:haproxy /etc/haproxy/ssl/proxy.q.whatsapp.net.pem
 popd
 
 # Start HAProxy
