@@ -46,7 +46,6 @@ USER haproxy
 
 # Expose the container-supported network ports
 EXPOSE 80/tcp
-EXPOSE 82/tcp
 EXPOSE 8080/tcp
 EXPOSE 6661/tcp
 EXPOSE 443/tcp
