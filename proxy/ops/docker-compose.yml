@@ -12,7 +12,7 @@ services:
     ports:
       - "80:80"     # HTTP
       - "443:443"   # HTTPS
-      - "2303:5222" # JABBER
+      - "5222:5222" # JABBER
       - "8391:8391" # HAPROXY statistics page
       - "8080:8080" # HTTP with accept-proxy processing
       - "6661:8443" # HTTPS with accept-proxy processing
